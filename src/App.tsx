@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import PetDetail from "./pages/PetDetail";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AboutUs from "./pages/AboutUs";
 import NotFound from "./pages/NotFound";
 // Add these routes as they'll be implemented later
 // import AgendarEntrevista from "./pages/AgendarEntrevista";
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/pet/:id" element={<PetDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Register />} />
+          <Route path="/sobre" element={<AboutUs />} />
           {/* Novas rotas - serão implementadas posteriormente */}
           <Route path="/agendar-entrevista" element={<NotFound />} />
           <Route path="/agendar-consulta" element={<NotFound />} />

@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,6 +18,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,8 +54,11 @@ export default function Register() {
     // Simulate registration success
     toast({
       title: "Cadastro realizado com sucesso!",
-      description: "Bem-vindo ao AdotaPet. Você já pode começar a usar a plataforma.",
+      description: "Bem-vindo ao AdotaPet. Você já pode fazer login na plataforma.",
     });
+    
+    // Redirecionar para a página de login após cadastro bem-sucedido
+    navigate("/login");
   };
 
   return (
