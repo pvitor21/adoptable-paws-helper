@@ -22,7 +22,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
         <div className="relative flex-1">
           <Input
             type="text"
-            placeholder="Buscar por nome, raça ou localização..."
+            placeholder="Buscar por código, nome, espécie ou situação..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10 pr-4 py-2 border-gray-300 focus:border-pet-purple focus:ring-pet-purple rounded-lg"

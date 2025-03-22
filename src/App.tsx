@@ -9,6 +9,14 @@ import PetDetail from "./pages/PetDetail";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+// Add these routes as they'll be implemented later
+// import AgendarEntrevista from "./pages/AgendarEntrevista";
+// import AgendarConsulta from "./pages/AgendarConsulta";
+// import GestaoAnimais from "./pages/GestaoAnimais";
+// import GestaoTutores from "./pages/GestaoTutores";
+// import GestaoVeterinarios from "./pages/GestaoVeterinarios";
+// import GestaoConsultas from "./pages/GestaoConsultas";
+// import GestaoVacinas from "./pages/GestaoVacinas";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +31,9 @@ const App = () => (
           <Route path="/pet/:id" element={<PetDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Register />} />
+          {/* Novas rotas - serão implementadas posteriormente */}
+          <Route path="/agendar-entrevista" element={<NotFound />} />
+          <Route path="/agendar-consulta" element={<NotFound />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

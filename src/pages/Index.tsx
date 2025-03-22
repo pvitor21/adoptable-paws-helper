@@ -7,12 +7,13 @@ import PetCard from "@/components/PetCard";
 import Footer from "@/components/Footer";
 import { petsData } from "@/data/pets";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export default function Index() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilters, setActiveFilters] = useState({
     distance: 100,
-    age: "any",
+    entryDate: "any", // Changed from age to entryDate
     animalTypes: [] as string[],
   });
 
@@ -37,9 +38,11 @@ export default function Index() {
       const queryLower = query.toLowerCase();
       filteredPets = filteredPets.filter(
         (pet) =>
+          pet.id.toString().includes(queryLower) || // Search by código_animal
           pet.name.toLowerCase().includes(queryLower) ||
-          pet.breed.toLowerCase().includes(queryLower) ||
-          pet.location.toLowerCase().includes(queryLower)
+          pet.type.toLowerCase().includes(queryLower) || // Search by espécie
+          pet.location.toLowerCase().includes(queryLower) ||
+          (pet.situation && pet.situation.toLowerCase().includes(queryLower)) // Search by situação
       );
     }
 
@@ -50,15 +53,20 @@ export default function Index() {
       );
     }
 
-    // Apply age filter
-    if (filters.age && filters.age !== "any") {
+    // Apply entry date filter instead of age
+    if (filters.entryDate && filters.entryDate !== "any") {
+      const now = new Date();
       filteredPets = filteredPets.filter((pet) => {
-        if (filters.age === "baby") return pet.age.includes("meses");
-        if (filters.age === "young") return pet.age.includes("1 ano") || pet.age.includes("2 anos");
-        if (filters.age === "adult") {
-          const ageNum = parseInt(pet.age);
-          return ageNum >= 3;
-        }
+        if (!pet.entryDate) return true;
+        
+        const entryDate = new Date(pet.entryDate);
+        const diffTime = Math.abs(now.getTime() - entryDate.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        if (filters.entryDate === "recent") return diffDays <= 30; // Last month
+        if (filters.entryDate === "medium") return diffDays > 30 && diffDays <= 90; // 1-3 months
+        if (filters.entryDate === "old") return diffDays > 90; // More than 3 months
+        
         return true;
       });
     }
@@ -99,7 +107,18 @@ export default function Index() {
         </section>
 
         <section className="container mx-auto px-4 py-12">
-          <FiltersBar onFilterChange={handleFilterChange} />
+          <div className="mb-8 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+            <FiltersBar onFilterChange={handleFilterChange} />
+            
+            <div className="flex gap-3">
+              <Link to="/agendar-entrevista" className="whitespace-nowrap text-sm md:text-base px-3 py-2 bg-pet-teal text-white rounded-md hover:bg-pet-teal/90 transition-colors">
+                Agendar Entrevista
+              </Link>
+              <Link to="/agendar-consulta" className="whitespace-nowrap text-sm md:text-base px-3 py-2 bg-pet-orange text-white rounded-md hover:bg-pet-orange/90 transition-colors">
+                Agendar Consulta
+              </Link>
+            </div>
+          </div>
 
           <div className="mb-6 flex justify-between items-center">
             <h2 className="text-2xl font-bold text-gray-800">
@@ -130,7 +149,7 @@ export default function Index() {
                   setSearchQuery("");
                   setActiveFilters({
                     distance: 100,
-                    age: "any",
+                    entryDate: "any",
                     animalTypes: [],
                   });
                   setDisplayedPets(petsData);
@@ -147,9 +166,10 @@ export default function Index() {
                     key={pet.id}
                     id={pet.id}
                     name={pet.name}
-                    age={pet.age}
+                    entryDate={pet.entryDate}
                     breed={pet.breed}
                     gender={pet.gender}
+                    weight={pet.weight}
                     image={pet.image}
                     location={pet.location}
                     distance={pet.distance}
@@ -176,49 +196,81 @@ export default function Index() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                Por que adotar um pet?
+                Como funciona nosso processo de adoção
               </h2>
               <p className="text-gray-600 max-w-3xl mx-auto">
-                Adotar um animal de estimação não só muda a vida dele, mas também a sua. 
-                Conheça algumas razões para escolher a adoção.
+                Nossa ONG segue um processo cuidadoso para garantir que os animais encontrem lares adequados e amorosos.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="bg-white rounded-xl p-6 shadow-sm">
                 <div className="w-14 h-14 bg-pet-purple/10 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-7 h-7 text-pet-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                  </svg>
+                  <span className="text-2xl font-bold text-pet-purple">1</span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">Salve uma vida</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">Cadastro</h3>
                 <p className="text-gray-600">
-                  Ao adotar, você está dando uma segunda chance a um animal que precisa de um lar amoroso.
+                  Realize seu cadastro como tutor fornecendo as informações necessárias.
                 </p>
               </div>
 
               <div className="bg-white rounded-xl p-6 shadow-sm">
                 <div className="w-14 h-14 bg-pet-teal/10 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-7 h-7 text-pet-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
+                  <span className="text-2xl font-bold text-pet-teal">2</span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">Combata o comércio</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">Entrevista</h3>
                 <p className="text-gray-600">
-                  A adoção ajuda a reduzir a demanda por criações comerciais e o abandono de animais.
+                  Agende uma entrevista para verificarmos se você está apto para adoção.
                 </p>
               </div>
 
               <div className="bg-white rounded-xl p-6 shadow-sm">
                 <div className="w-14 h-14 bg-pet-orange/10 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-7 h-7 text-pet-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
+                  <span className="text-2xl font-bold text-pet-orange">3</span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">Ganhe um amigo</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">Adoção</h3>
                 <p className="text-gray-600">
-                  Os pets adotados frequentemente desenvolvem laços mais fortes e demonstram mais gratidão.
+                  Após aprovação, você poderá escolher um pet compatível com seu perfil.
                 </p>
+              </div>
+
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-green-600">4</span>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">Acompanhamento</h3>
+                <p className="text-gray-600">
+                  Realizamos acompanhamento periódico para garantir o bem-estar do animal.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="container mx-auto px-4 py-16">
+          <div className="bg-white rounded-xl overflow-hidden shadow-lg">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="p-8 lg:p-12 flex flex-col justify-center">
+                <h2 className="text-3xl font-bold text-gray-800 mb-6">Área do colaborador</h2>
+                <p className="text-gray-600 mb-8">
+                  Se você é secretário ou veterinário da nossa ONG, acesse a área restrita para 
+                  gerenciar cadastros de animais, tutores, agendar consultas e muito mais.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/login" className="px-6 py-3 bg-pet-purple text-white rounded-md hover:bg-pet-purple/90 transition-colors">
+                    Acessar área restrita
+                  </Link>
+                  <Link to="/cadastro" className="px-6 py-3 border border-pet-purple text-pet-purple rounded-md hover:bg-pet-purple/10 transition-colors">
+                    Cadastrar novo usuário
+                  </Link>
+                </div>
+              </div>
+              <div className="bg-gray-200 h-64 lg:h-auto">
+                <img 
+                  src="https://images.unsplash.com/photo-1581092443136-b9330e05b271?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHZldGVyaW5hcmlhbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" 
+                  alt="Área do colaborador" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
