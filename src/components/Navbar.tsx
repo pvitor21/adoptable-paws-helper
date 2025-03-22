@@ -28,7 +28,7 @@ export default function Navbar() {
             <Link to="/" className="text-gray-700 hover:text-pet-purple transition-colors font-medium">
               Início
             </Link>
-            <Link to="/favoritos" className="text-gray-700 hover:text-pet-purple transition-colors font-medium">
+            <Link to="/historias" className="text-gray-700 hover:text-pet-purple transition-colors font-medium">
               Favoritos
             </Link>
             <Link to="/sobre" className="text-gray-700 hover:text-pet-purple transition-colors font-medium">
@@ -79,7 +79,7 @@ export default function Navbar() {
               Início
             </Link>
             <Link
-              to="/favoritos"
+              to="/historias"
               className="text-gray-700 hover:text-pet-purple transition-colors font-medium py-2"
               onClick={() => setMobileMenuOpen(false)}
             >

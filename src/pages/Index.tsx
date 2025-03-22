@@ -170,7 +170,9 @@ export default function Index() {
                     breed={pet.breed}
                     gender={pet.gender}
                     weight={pet.weight}
-                    image={pet.image}
+                    image={pet.id === 1 ? "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" : 
+                           pet.id === 2 ? "https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" : 
+                           pet.image}
                     location={pet.location}
                     distance={pet.distance}
                   />
@@ -267,7 +269,7 @@ export default function Index() {
               </div>
               <div className="bg-gray-200 h-64 lg:h-auto">
                 <img 
-                  src="https://images.unsplash.com/photo-1581092443136-b9330e05b271?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHZldGVyaW5hcmlhbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60" 
+                  src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" 
                   alt="Área do colaborador" 
                   className="w-full h-full object-cover"
                 />

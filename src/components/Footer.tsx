@@ -91,10 +91,10 @@ export default function Footer() {
                 contato@adotapet.com
               </li>
               <li className="text-gray-600 text-sm">
-                (11) 99999-9999
+                (21) 96724-2515
               </li>
               <li className="text-gray-600 text-sm">
-                São Paulo, SP
+                Niterói, RJ
               </li>
             </ul>
           </div>
