@@ -1,58 +1,5 @@
-export interface Pet {
-  id: number; // codigo_animal (pk)
-  name: string;
-  type: string; // especie
-  breed: string;
-  entryDate: string; // data de entrada
-  gender: string; // sexo
-  weight: string; // peso
-  description: string;
-  image: string;
-  images: string[];
-  location: string;
-  distance: string;
-  situation?: string; // situação para consultas
-  vaccinations?: Vaccination[];
-  adoptedBy?: number; // ID do tutor que adotou (se houver)
-}
 
-export interface Vaccination {
-  date: string; // data de vacinação
-  type: string; // tipo de vacinação
-  validity: string; // validade da vacina
-}
-
-export interface Tutor {
-  id: number;
-  name: string;
-  cpf: string;
-  phone: string;
-  address: string;
-  hasExistingPet: boolean; // possui_animal
-  hasReturnedPet: boolean; // devolucao_animal
-  adoptedPets?: number[]; // IDs dos pets adotados
-}
-
-export interface Veterinarian {
-  id: number;
-  name: string;
-  cpf: string;
-  medicalRecord: string; // registro_medico (pk)
-  specialty: string; // especialidade
-  salary: number; // salário
-  address: string;
-  phone: string;
-}
-
-export interface Appointment {
-  id: number;
-  petId: number; // ID do animal
-  vetId: number; // ID do veterinário que realiza
-  situation: string; // situação do animal
-  startTime: string; // horainicio
-  endTime: string; // horafim
-  details: string; // detalhes
-}
+import { Pet } from './types';
 
 // Exemplo de dados de pets
 export const petsData: Pet[] = [
@@ -184,11 +131,11 @@ export const petsData: Pet[] = [
     gender: "Macho",
     weight: "12kg",
     description: "Bob é um cachorro divertido e cheio de personalidade. Apesar de pequeno, tem muita energia e adora brincar. É muito sociável e se dá bem com todos, inclusive crianças e outros pets. Ele está procurando um lar amoroso onde possa se divertir e receber muitos carinhos.",
-    image: "https://images.unsplash.com/photo-1583511655826-05700442976d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZnJlbmNoJTIwYnVsbGRvZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1612774412771-005aa03c6c3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     images: [
-      "https://images.unsplash.com/photo-1583511655826-05700442976d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZnJlbmNoJTIwYnVsbGRvZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
-      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlbmNoJTIwYnVsbGRvZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
-      "https://images.unsplash.com/photo-1588269965522-1b6b73a6ce7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZnJlbmNoJTIwYnVsbGRvZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+      "https://images.unsplash.com/photo-1612774412771-005aa03c6c3f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1593077330786-8ed53838dc1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
     ],
     location: "Niterói, RJ",
     distance: "8 km",
@@ -272,85 +219,15 @@ export const petsData: Pet[] = [
     gender: "Fêmea",
     weight: "0.1kg",
     description: "Pipoca é uma calopsita alegre e tagarela. Ela assobia melodias e adora interagir com pessoas. Já está domesticada e adora ficar solta fora da gaiola. É muito sociável e gosta de atenção.",
-    image: "https://images.unsplash.com/photo-1522858547137-f98a3845f1b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29ja2F0aWVsfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+    image: "https://images.unsplash.com/photo-1591198936750-16d8e15edc9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     images: [
-      "https://images.unsplash.com/photo-1522858547137-f98a3845f1b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29ja2F0aWVsfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-      "https://images.unsplash.com/photo-1595780413269-f3740801c656?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29ja2F0aWVsfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-      "https://images.unsplash.com/photo-1552728089-57bdde30beb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmlyZCUyMGNhZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+      "https://images.unsplash.com/photo-1591198936750-16d8e15edc9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1553217420-e8f8dde808a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1557499305-0af888c3d8ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
     ],
     location: "Niterói, RJ",
     distance: "10 km",
     situation: "Saudável",
     vaccinations: []
-  }
-];
-
-// Dados dos tutores
-export const tutorsData: Tutor[] = [
-  {
-    id: 1,
-    name: "Carlos Silva",
-    cpf: "123.456.789-00",
-    phone: "(11) 98765-4321",
-    address: "Rua das Flores, 123 - São Paulo, SP",
-    hasExistingPet: true,
-    hasReturnedPet: false,
-    adoptedPets: []
-  },
-  {
-    id: 2,
-    name: "Maria Oliveira",
-    cpf: "987.654.321-00",
-    phone: "(11) 91234-5678",
-    address: "Avenida Paulista, 1000 - São Paulo, SP",
-    hasExistingPet: false,
-    hasReturnedPet: false,
-    adoptedPets: []
-  }
-];
-
-// Dados dos veterinários
-export const veterinariansData: Veterinarian[] = [
-  {
-    id: 1,
-    name: "Dr. Ricardo Mendes",
-    cpf: "111.222.333-44",
-    medicalRecord: "CRMV-SP 12345",
-    specialty: "Clínica Geral",
-    salary: 5000.00,
-    address: "Rua dos Veterinários, 500 - São Paulo, SP",
-    phone: "(11) 97777-8888"
-  },
-  {
-    id: 2,
-    name: "Dra. Ana Beatriz",
-    cpf: "555.666.777-88",
-    medicalRecord: "CRMV-SP 54321",
-    specialty: "Cirurgia",
-    salary: 6500.00,
-    address: "Avenida Brasil, 200 - São Paulo, SP",
-    phone: "(11) 96666-7777"
-  }
-];
-
-// Dados das consultas
-export const appointmentsData: Appointment[] = [
-  {
-    id: 1,
-    petId: 1,
-    vetId: 1,
-    situation: "Exame de rotina",
-    startTime: "2023-10-15T10:00:00",
-    endTime: "2023-10-15T11:00:00",
-    details: "Checkup completo e atualização de vacinas"
-  },
-  {
-    id: 2,
-    petId: 2,
-    vetId: 2,
-    situation: "Tratamento em andamento",
-    startTime: "2023-10-16T14:30:00",
-    endTime: "2023-10-16T15:30:00",
-    details: "Acompanhamento de tratamento dermatológico"
   }
 ];
