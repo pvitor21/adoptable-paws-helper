@@ -9,6 +9,22 @@ import { Heart, Phone, Mail, MapPin, Clock, Star, ChevronLeft, ChevronRight, Arr
 import { petsData } from "@/data/pets";
 import { cn } from "@/lib/utils";
 
+// Define default values for optional properties
+const DEFAULT_SHELTER = {
+  name: "Abrigo Amigo dos Animais",
+  image: "https://images.unsplash.com/photo-1588943211346-0908a1fb0b01?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&h=150&q=80",
+  phone: "(11) 99999-9999",
+  email: "contato@abrigoamigo.org",
+  rating: "4.8 (120 avaliações)"
+};
+
+// Define default traits for pets
+const DEFAULT_TRAITS = {
+  personality: ["Amoroso", "Brincalhão", "Sociável"],
+  health: ["Vacinado", "Vermifugado", "Castrado"],
+  requirements: ["Ambiente seguro", "Visita prévia", "Termo de adoção"]
+};
+
 export default function PetDetail() {
   const { id } = useParams<{ id: string }>();
   const pet = petsData.find((p) => p.id === Number(id));
@@ -119,13 +135,10 @@ export default function PetDetail() {
                   {pet.gender}
                 </span>
                 <span className="bg-gray-100 text-gray-800 text-sm font-medium px-3 py-1 rounded-full">
-                  {pet.age}
+                  {pet.weight}
                 </span>
                 <span className="bg-gray-100 text-gray-800 text-sm font-medium px-3 py-1 rounded-full">
-                  {pet.size}
-                </span>
-                <span className="bg-gray-100 text-gray-800 text-sm font-medium px-3 py-1 rounded-full">
-                  {pet.color}
+                  {pet.type}
                 </span>
               </div>
               <div className="flex items-center mb-6 text-sm text-gray-500">
@@ -143,7 +156,7 @@ export default function PetDetail() {
                 <Card className="p-4">
                   <h3 className="text-lg font-medium mb-3 text-gray-800">Personalidade</h3>
                   <div className="flex flex-wrap gap-2">
-                    {pet.personality.map((trait, idx) => (
+                    {DEFAULT_TRAITS.personality.map((trait, idx) => (
                       <span key={idx} className="bg-pet-purple/10 text-pet-purple text-sm font-medium px-3 py-1 rounded-full">
                         {trait}
                       </span>
@@ -153,7 +166,7 @@ export default function PetDetail() {
                 <Card className="p-4">
                   <h3 className="text-lg font-medium mb-3 text-gray-800">Saúde</h3>
                   <div className="flex flex-wrap gap-2">
-                    {pet.health.map((item, idx) => (
+                    {DEFAULT_TRAITS.health.map((item, idx) => (
                       <span key={idx} className="bg-pet-teal/10 text-pet-teal text-sm font-medium px-3 py-1 rounded-full">
                         {item}
                       </span>
@@ -163,7 +176,7 @@ export default function PetDetail() {
                 <Card className="p-4">
                   <h3 className="text-lg font-medium mb-3 text-gray-800">Requisitos</h3>
                   <ul className="space-y-2 text-gray-700">
-                    {pet.requirements.map((req, idx) => (
+                    {DEFAULT_TRAITS.requirements.map((req, idx) => (
                       <li key={idx} className="flex items-center">
                         <div className="w-1.5 h-1.5 rounded-full bg-pet-orange mr-2"></div>
                         {req}
@@ -180,15 +193,15 @@ export default function PetDetail() {
               <Card className="p-6 mb-6">
                 <div className="flex items-center mb-4">
                   <img
-                    src={pet.shelterImage}
-                    alt={pet.shelterName}
+                    src={DEFAULT_SHELTER.image}
+                    alt={DEFAULT_SHELTER.name}
                     className="w-12 h-12 rounded-full object-cover mr-4"
                   />
                   <div>
-                    <h3 className="font-semibold text-gray-800">{pet.shelterName}</h3>
+                    <h3 className="font-semibold text-gray-800">{DEFAULT_SHELTER.name}</h3>
                     <div className="flex items-center text-amber-500">
                       <Star size={16} className="fill-amber-500" />
-                      <span className="ml-1 text-sm text-gray-700">{pet.shelterRating}</span>
+                      <span className="ml-1 text-sm text-gray-700">{DEFAULT_SHELTER.rating}</span>
                     </div>
                   </div>
                 </div>
@@ -199,11 +212,11 @@ export default function PetDetail() {
                   </div>
                   <div className="flex items-center text-gray-700">
                     <Phone size={18} className="text-pet-purple mr-3" />
-                    <span>{pet.shelterPhone}</span>
+                    <span>{DEFAULT_SHELTER.phone}</span>
                   </div>
                   <div className="flex items-center text-gray-700">
                     <Mail size={18} className="text-pet-purple mr-3" />
-                    <span className="truncate">{pet.shelterEmail}</span>
+                    <span className="truncate">{DEFAULT_SHELTER.email}</span>
                   </div>
                   <div className="flex items-center text-gray-700">
                     <Clock size={18} className="text-pet-purple mr-3" />
