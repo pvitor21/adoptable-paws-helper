@@ -45,11 +45,11 @@ export default function Blog() {
     }
   ];
 
-  // Function to calculate days since arrival
-  const getDaysSinceArrival = (dateString) => {
+  // Function to calculate days since arrival - fixed to handle dates properly
+  const getDaysSinceArrival = (dateString: string): number => {
     const arrivalDate = new Date(dateString);
     const currentDate = new Date();
-    const diffTime = Math.abs(currentDate - arrivalDate);
+    const diffTime = currentDate.getTime() - arrivalDate.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays;
   };
