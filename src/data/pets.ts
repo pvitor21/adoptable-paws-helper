@@ -190,7 +190,7 @@ export const petsData: Pet[] = [
       "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZnJlbmNoJTIwYnVsbGRvZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
       "https://images.unsplash.com/photo-1588269965522-1b6b73a6ce7b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZnJlbmNoJTIwYnVsbGRvZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
     ],
-    location: "São Paulo, SP",
+    location: "Niterói, RJ",
     distance: "8 km",
     situation: "Saudável",
     vaccinations: [
@@ -221,7 +221,7 @@ export const petsData: Pet[] = [
       "https://images.unsplash.com/photo-1596854273338-cbf078ec7071?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
       "https://images.unsplash.com/photo-1626602411112-10742f9a3ab8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNhdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
     ],
-    location: "São Paulo, SP",
+    location: "Niterói, RJ",
     distance: "15 km",
     situation: "Saudável",
     vaccinations: [
@@ -278,7 +278,7 @@ export const petsData: Pet[] = [
       "https://images.unsplash.com/photo-1595780413269-f3740801c656?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29ja2F0aWVsfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
       "https://images.unsplash.com/photo-1552728089-57bdde30beb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmlyZCUyMGNhZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
     ],
-    location: "São Paulo, SP",
+    location: "Niterói, RJ",
     distance: "10 km",
     situation: "Saudável",
     vaccinations: []
